@@ -1,0 +1,15 @@
+
+1.Factory Pattern
+
+Q.What is Factory Pattern?
+ANS : A creation design pattern used to create the different object based on requirement
+
+Q.What problem does it solve?
+ANS : helps to create the object in centralize place without making the core code cluttered
+
+Q.How is implemented?
+ANS : Create the factory class with method which return the object checking the conditions
+
+Q.Real example?
+ANS : we can have a class of Vehicle which will return the different vehicle object like
+      bike car bus 
