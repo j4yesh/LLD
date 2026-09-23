@@ -60,5 +60,30 @@ Q. what problem does it solve?
 ANS : its tidious and repetive to call the constructor with lots of optional
       fields
 
+Q. how to implement?
+ANS : in the target class create the builder class which will have the same parameter as 
+      target class write the each setting in a way like it returns itself (idea to form chain
+      like pattern) , then declare the builder method which will return the target object
+      set the relevant attribute and create the actual object and just return 
+      Hope you understood!
+
 Q. example?
 ANS : StringBuilder and HttpRequest 
+
+
+5.Prototype Pattern
+
+Q. what is Prototype?
+ANS : creational design pattern that creates new objects by cloning an existing object (prototype)
+      instead of creating and initializing a new object from scratch.
+
+Q. what problem does it solve?
+ANS : when creating and initializing objects is complex,prototype allows us to create new object
+      by cloning already configured object
+
+Q. how to implement?
+ANS : When a new object is required, clone the prototype instead of creating it from scratch.
+    A factory/registry can optionally maintain and provide prototypes.
+
+Q. Real example
+ANS : Instantiating the objects in game dev. , GUI frameworks
