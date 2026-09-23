@@ -13,3 +13,20 @@ ANS : Create the factory class with method which return the object checking the 
 Q.Real example?
 ANS : we can have a class of Vehicle which will return the different vehicle object like
       bike car bus 
+
+2.Abstract Factory
+
+Q.What is Abstract Factory Pattern?
+ANS : provides an interface for creating families of related object without specifying their concrete class
+
+Q.What problem it solve?
+ANS: When we need to create multiple related objects, 
+    Abstract Factory separates their creation into different factories and ensures that related objects are created together.
+
+Q.How is implemented?
+ANS : Create the abstract factory interface containing the different methods
+      deriving the single Factory interface
+
+Q.Real example?
+ANS: We can have different product families based on vehicle brands, where BMWFactory
+     creates BMW-related vehicles and KTMFactory creates KTM-related vehicles.
