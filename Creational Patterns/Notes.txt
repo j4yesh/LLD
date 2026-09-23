@@ -30,3 +30,22 @@ ANS : Create the abstract factory interface containing the different methods
 Q.Real example?
 ANS: We can have different product families based on vehicle brands, where BMWFactory
      creates BMW-related vehicles and KTMFactory creates KTM-related vehicles.
+
+3.Singletone Pattern
+
+Q.What is it?
+ANS: creational design pattern allows to keep and access the single instance of class
+     throughout the system
+
+Q.what problem it solves?
+ANS: ensuring only one instance of class exist when having multiple
+      instance would be unnecessary or undesirable, while providing 
+      common instance point to it 
+
+Q.How to implemented?
+ANS: create the the class which has static instance and methods. 
+     everytime getInstance method called check if instance is already
+     availble then create return accordingly
+
+Q.Real example
+ANS: we can have single db connection for a system or logger
