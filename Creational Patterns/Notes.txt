@@ -49,3 +49,16 @@ ANS: create the the class which has static instance and methods.
 
 Q.Real example
 ANS: we can have single db connection for a system or logger
+
+4.Builder Patterns
+
+Q. what is it?
+ANS : pattern that allows to build objects with complex and lots of optional
+      fields
+
+Q. what problem does it solve?
+ANS : its tidious and repetive to call the constructor with lots of optional
+      fields
+
+Q. example?
+ANS : StringBuilder and HttpRequest 
