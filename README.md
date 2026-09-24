@@ -1,7 +1,7 @@
 # Low Level Design (LLD)
 
 <div align="center">
-  <img src="assets/cute_boy_learning_lld.jpg" alt="Cute Boy Learning LLD" width="600"/>
+  <img src="assets/lld_graffiti_wall.jpg" alt="LLD Graffiti Wall" width="600"/>
 </div>
 
 Welcome to my LLD repository! This workspace contains my notes, explorations, and code implementations for various Low Level Design (LLD) concepts, Object-Oriented principles, and Design Patterns.
@@ -17,7 +17,13 @@ Welcome to my LLD repository! This workspace contains my notes, explorations, an
   - [3. Singleton Pattern](#3-singleton-pattern)
   - [4. Builder Pattern](#4-builder-pattern)
   - [5. Prototype Pattern](#5-prototype-pattern)
-- [Summary Comparison Table](#summary-comparison-table)
+- [Creational Summary Table](#creational-summary-table)
+- [Behavioral Design Patterns](#behavioral-design-patterns)
+  - [Overview & Quick Links](#overview--quick-links-1)
+  - [1. Strategy Pattern](#1-strategy-pattern)
+  - [2. Observer Pattern](#2-observer-pattern)
+  - [3. Command Pattern](#3-command-pattern)
+- [Behavioral Summary Table](#behavioral-summary-table)
 
 ---
 
@@ -134,7 +140,7 @@ Creational design patterns focus on how objects are created. Instead of creating
 
 ---
 
-## Summary Comparison Table
+## Creational Summary Table
 
 | Pattern | In Simple Words | Main Benefit | When to Use |
 | :--- | :--- | :--- | :--- |
@@ -143,5 +149,84 @@ Creational design patterns focus on how objects are created. Instead of creating
 | **Singleton** | Only one single instance exists everywhere | Prevents conflicts and saves resources | Database connection, app logger, cache |
 | **Builder** | Builds an object step-by-step with chaining | No giant constructors with lots of nulls | When an object has many optional fields |
 | **Prototype** | Copies an existing object | Saves time when object setup is complex | Spawning game objects, copying configured templates |
+
+---
+
+## Behavioral Design Patterns
+
+Behavioral design patterns focus on how objects talk to each other. Instead of tightly coupling objects together, these patterns help organize communication and responsibilities in a clean and flexible way.
+
+### Overview & Quick Links
+
+| Pattern | What it does | Java Code |
+| :--- | :--- | :--- |
+| **Strategy Pattern** | Lets you switch the algorithm at runtime without changing client code. | [`Strategy.java`](./Behavioral%20Patterns/Strategy.java) |
+| **Observer Pattern** | Lets an object notify other objects whenever a certain event happens. | [`Observer.java`](./Behavioral%20Patterns/Observer.java) |
+| **Command Pattern** | Turns a request into an object so it can be logged, undone, or queued. | [`CommandP.java`](./Behavioral%20Patterns/CommandP.java) |
+| **My Raw Notes** | Original notes file. | [`Notes.txt`](./Behavioral%20Patterns/Notes.txt) |
+
+---
+
+### 1. Strategy Pattern
+
+#### **Q. What is the Strategy Pattern?**
+**Ans:** A behavioral design pattern that allows us to switch the algorithm at runtime. There can be multiple ways to do the same task, and we pick which one to execute at runtime.
+
+#### **Q. What problem does it solve?**
+**Ans:** Hardcoding the logic in client code makes it cluttered and violates SRP (Single Responsibility Principle).
+
+#### **Q. How is it implemented?**
+**Ans:** Create different strategy classes that implement a common `Strategy` interface. Then assign the desired strategy to a reference of that interface and call it.
+
+#### **Q. Real-world example?**
+**Ans:** Payment processors (credit card, crypto, UPI) or navigation apps (driving, walking, cycling routes).
+
+> **Code:** [`Strategy.java`](./Behavioral%20Patterns/Strategy.java)
+
+---
+
+### 2. Observer Pattern
+
+#### **Q. What is the Observer Pattern?**
+**Ans:** A behavioral design pattern that allows an object (subject) to notify other objects whenever a certain event occurs.
+
+#### **Q. What problem does it solve?**
+**Ans:** It avoids tightly coupling the object generating an event with the objects that need to react to it.
+
+#### **Q. How is it implemented?**
+**Ans:** Create a subject that maintains a list of observers. Provide methods to add/remove observers and call their notification method when something happens.
+
+#### **Q. Real-world example?**
+**Ans:** YouTube channels notifying subscribers, stock market price alerts, or event systems in game development.
+
+> **Code:** [`Observer.java`](./Behavioral%20Patterns/Observer.java)
+
+---
+
+### 3. Command Pattern
+
+#### **Q. What is the Command Pattern?**
+**Ans:** A behavioral design pattern that allows you to treat a request as an object, keeping the code loosely coupled.
+
+#### **Q. What problem does it solve?**
+**Ans:** It decouples the object that requests an operation from the object that actually performs it. Also allows requests to be logged, undone, queued, or executed later.
+
+#### **Q. How is it implemented?**
+**Ans:** Create a `Command` interface with an `execute()` method. Create concrete classes for different actions. Each command holds a reference to a receiver that does the actual work. An invoker receives and executes the command.
+
+#### **Q. Real-world example?**
+**Ans:** TV remote controls, game development input handling, or remote procedure calls in IoT.
+
+> **Code:** [`CommandP.java`](./Behavioral%20Patterns/CommandP.java)
+
+---
+
+## Behavioral Summary Table
+
+| Pattern | In Simple Words | Main Benefit | When to Use |
+| :--- | :--- | :--- | :--- |
+| **Strategy** | Swap algorithms at runtime | No hardcoded logic, clean switching | Payment methods, sorting algorithms, navigation routes |
+| **Observer** | One object notifies many others | Loose coupling between event producer and consumers | YouTube subscriptions, stock alerts, game events |
+| **Command** | Wrap a request as an object | Can undo, queue, or log operations | Remote controls, undo/redo, task scheduling |
 
 ---
