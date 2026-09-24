@@ -1,0 +1,15 @@
+1. Strategy Pattern
+
+Q.what is it?
+ans : allows us to switch the alorithm at runtime. there can be multiple way
+      to do same task. we execute the selected method in runtime
+
+Q.what problem does it solves?
+ans : hardcoding the logic in client code make it cluttered and violates SRP.
+
+Q.how it works?
+ans : create the different Strategy class implementing the Strategy interface
+      and assign them to ref of interface
+
+Q.real example
+ans : payment processors , navigation
