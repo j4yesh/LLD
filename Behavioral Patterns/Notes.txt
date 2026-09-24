@@ -33,3 +33,23 @@ ans: create the subject that maintains the list of observer. provides methods
 
 Q.real world example?
 ans: Game development,Youtube,Stock market
+
+
+3.Command Pattern
+
+Q.what is it?
+ans : allows to treat the request as a object keeps code losely coupled
+
+Q.what problem it solves?
+ans : it decouples the object that requests an operation from object
+      that performs operation. also allows to request logged,undone,queue
+      or execute later
+
+Q.how to implement?
+ans : create a Command interface with execute() method. create concrete
+      class for the different actions. each Command maintains a reference
+      to receiver that performs the actual operation. invoker receives and 
+      executes Command
+
+Q.real world example?
+ans : Game development, Remote procedure call in IOT
