@@ -13,3 +13,23 @@ ans : create the different Strategy class implementing the Strategy interface
 
 Q.real example
 ans : payment processors , navigation
+
+
+
+
+2.Observer Pattern
+
+Q.what is it?
+ans: allows the object (subject) to notify other object whenever the certain
+     event occurs
+
+Q.what problem it solves?
+ans: it avoids the tightly coupling the object generating an event that need to 
+     react with it
+
+Q.how to implement?
+ans: create the subject that maintains the list of observer. provides methods
+     to add remove the observer and calls their notification method
+
+Q.real world example?
+ans: Game development,Youtube,Stock market
