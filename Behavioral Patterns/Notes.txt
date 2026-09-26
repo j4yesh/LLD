@@ -1,17 +1,17 @@
 1. Strategy Pattern
 
-Q.what is it?
+q.what is it?
 ans : allows us to switch the alorithm at runtime. there can be multiple way
       to do same task. we execute the selected method in runtime
 
-Q.what problem does it solves?
+q.what problem does it solves?
 ans : hardcoding the logic in client code make it cluttered and violates SRP.
 
-Q.how it works?
+q.how it works?
 ans : create the different Strategy class implementing the Strategy interface
       and assign them to ref of interface
 
-Q.real example
+q.real example
 ans : payment processors , navigation
 
 
@@ -19,55 +19,76 @@ ans : payment processors , navigation
 
 2.Observer Pattern
 
-Q.what is it?
+q.what is it?
 ans: allows the object (subject) to notify other object whenever the certain
      event occurs
 
-Q.what problem it solves?
+q.what problem it solves?
 ans: it avoids the tightly coupling the object generating an event that need to 
      react with it
 
-Q.how to implement?
+q.how to implement?
 ans: create the subject that maintains the list of observer. provides methods
      to add remove the observer and calls their notification method
 
-Q.real world example?
+q.real world example?
 ans: Game development,Youtube,Stock market
 
 
 3.Command Pattern
 
-Q.what is it?
+q.what is it?
 ans : allows to treat the request as a object keeps code losely coupled
 
-Q.what problem it solves?
+q.what problem it solves?
 ans : it decouples the object that requests an operation from object
       that performs operation. also allows to request logged,undone,queue
       or execute later
 
-Q.how to implement?
+q.how to implement?
 ans : create a Command interface with execute() method. create concrete
       class for the different actions. each Command maintains a reference
       to receiver that performs the actual operation. invoker receives and 
       executes Command
 
-Q.real world example?
+q.real world example?
 ans : Game development, Remote procedure call in IOT
 
 4.Template Pattern
 
-Q.what is it?
+q.what is it?
 ans : allows to define the blueprint of algorithm in parent class and 
       override the specific steps in child class      
 
-Q.what problem does it solve?
+q.what problem does it solve?
 ans : avoids duplication of code if multiple class and following 
       same sequence of steps to perform a task. but there can be differences in 
       implementation of some steps.
 
-Q.how it works?
+q.how it works?
 ans : create an abstract class that defines the template method 
       which contains the skeleton of algorithm.
 
-Q.real world example?
+q.real world example?
 ans : Game development , Algorithm implementations
+
+5.State Pattern
+
+q.what is it?
+ans : objects can alter there behavior based on current state,state
+      patterns helps to keep implementation modular and scalable.
+      encapsulates state specific behavior into separate class
+
+q.what problem does it solve?
+ans : implementing the behavior of object in main class which may
+      change based on state makes code clutter. keeps if else block
+      in main class to check the state
+
+q.how to implement?
+ans : create the class for each state which is defines the behavior,
+      also there is nextState in state class which will directly assign
+      the next stateClass instance to the context.
+      (nextState() isn't a mandatory part of the State Pattern.)
+
+q.real world example?
+ans : Programming card games like UNO,Rummy etc

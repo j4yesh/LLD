@@ -45,7 +45,7 @@ class Tea extends Beverage {
 
 class Template {
 
-    public static void main(String[] args) {
+    public static void main(String[] jayesh) {
         Beverage coffee = new Coffee();
         coffee.prepareRecipe();
         Beverage tea = new Tea();
