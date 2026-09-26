@@ -53,3 +53,21 @@ ans : create a Command interface with execute() method. create concrete
 
 Q.real world example?
 ans : Game development, Remote procedure call in IOT
+
+4.Template Pattern
+
+Q.what is it?
+ans : allows to define the blueprint of algorithm in parent class and 
+      override the specific steps in child class      
+
+Q.what problem does it solve?
+ans : avoids duplication of code if multiple class and following 
+      same sequence of steps to perform a task. but there can be differences in 
+      implementation of some steps.
+
+Q.how it works?
+ans : create an abstract class that defines the template method 
+      which contains the skeleton of algorithm.
+
+Q.real world example?
+ans : Game development , Algorithm implementations
