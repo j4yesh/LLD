@@ -23,6 +23,9 @@ Welcome to my LLD repository! This workspace contains my notes, explorations, an
   - [1. Strategy Pattern](#1-strategy-pattern)
   - [2. Observer Pattern](#2-observer-pattern)
   - [3. Command Pattern](#3-command-pattern)
+  - [4. Template Pattern](#4-template-pattern)
+  - [5. State Pattern](#5-state-pattern)
+  - [6. Chain of Responsibility Pattern](#6-chain-of-responsibility-pattern)
 - [Behavioral Summary Table](#behavioral-summary-table)
 
 ---
@@ -163,6 +166,9 @@ Behavioral design patterns focus on how objects talk to each other. Instead of t
 | **Strategy Pattern** | Lets you switch the algorithm at runtime without changing client code. | [`Strategy.java`](./Behavioral%20Patterns/Strategy.java) |
 | **Observer Pattern** | Lets an object notify other objects whenever a certain event happens. | [`Observer.java`](./Behavioral%20Patterns/Observer.java) |
 | **Command Pattern** | Turns a request into an object so it can be logged, undone, or queued. | [`CommandP.java`](./Behavioral%20Patterns/CommandP.java) |
+| **Template Pattern** | Defines the blueprint of an algorithm in a parent class, lets subclasses override specific steps. | [`Template.java`](./Behavioral%20Patterns/Template.java) |
+| **State Pattern** | Lets an object change its behavior based on its current state. | [`State.java`](./Behavioral%20Patterns/State.java) |
+| **Chain of Responsibility Pattern** | Passes a request through a chain of handlers until one handles it. | [`ChainOfResponsibility.java`](./Behavioral%20Patterns/ChainOfResponsibility.java) |
 | **My Raw Notes** | Original notes file. | [`Notes.txt`](./Behavioral%20Patterns/Notes.txt) |
 
 ---
@@ -221,6 +227,60 @@ Behavioral design patterns focus on how objects talk to each other. Instead of t
 
 ---
 
+### 4. Template Pattern
+
+#### **Q. What is the Template Pattern?**
+**Ans:** A behavioral design pattern that defines the blueprint of an algorithm in a parent class and lets subclasses override specific steps.
+
+#### **Q. What problem does it solve?**
+**Ans:** Avoids duplication of code when multiple classes follow the same sequence of steps to perform a task, but some steps differ in implementation.
+
+#### **Q. How is it implemented?**
+**Ans:** Create an abstract class that defines a template method containing the skeleton of the algorithm. Subclasses override the specific steps they need to change.
+
+#### **Q. Real-world example?**
+**Ans:** Algorithm implementations where the overall flow is the same but individual steps vary.
+
+> **Code:** [`Template.java`](./Behavioral%20Patterns/Template.java)
+
+---
+
+### 5. State Pattern
+
+#### **Q. What is the State Pattern?**
+**Ans:** A behavioral design pattern where objects can alter their behavior based on their current state. It encapsulates state-specific behavior into separate classes, keeping things modular and scalable.
+
+#### **Q. What problem does it solve?**
+**Ans:** Implementing state-dependent behavior directly in the main class makes code cluttered with if-else blocks checking the current state.
+
+#### **Q. How is it implemented?**
+**Ans:** Create a class for each state that defines the behavior. Each state class can also have a `nextState()` method that assigns the next state class instance to the context. (`nextState()` isn't a mandatory part of the State Pattern.)
+
+#### **Q. Real-world example?**
+**Ans:** Programming card games like UNO or Rummy, or game character states like Idle → Running → Jumping → Falling → Dead.
+
+> **Code:** [`State.java`](./Behavioral%20Patterns/State.java)
+
+---
+
+### 6. Chain of Responsibility Pattern
+
+#### **Q. What is the Chain of Responsibility Pattern?**
+**Ans:** A behavioral design pattern that passes the request through a chain of handlers until one of them handles it.
+
+#### **Q. What problem does it solve?**
+**Ans:** Avoids a giant if-else block to resolve requests, where the logic of handling is tightly coupled.
+
+#### **Q. How is it implemented?**
+**Ans:** The main idea is one object says, "if I can't resolve this, I'll pass it to the next one." Objects are linked together. If one is unable to resolve the request, it just passes it along.
+
+#### **Q. Real-world example?**
+**Ans:** Leave approval systems, or game damage handlers like Attack → Shield → Armor → Player.
+
+> **Code:** [`ChainOfResponsibility.java`](./Behavioral%20Patterns/ChainOfResponsibility.java)
+
+---
+
 ## Behavioral Summary Table
 
 | Pattern | In Simple Words | Main Benefit | When to Use |
@@ -228,5 +288,8 @@ Behavioral design patterns focus on how objects talk to each other. Instead of t
 | **Strategy** | Swap algorithms at runtime | No hardcoded logic, clean switching | Payment methods, sorting algorithms, navigation routes |
 | **Observer** | One object notifies many others | Loose coupling between event producer and consumers | YouTube subscriptions, stock alerts, game events |
 | **Command** | Wrap a request as an object | Can undo, queue, or log operations | Remote controls, undo/redo, task scheduling |
+| **Template** | Define algorithm skeleton, override specific steps | Avoids code duplication across similar workflows | Algorithm implementations, data processing pipelines |
+| **State** | Behavior changes based on current state | No cluttered if-else state checks | Game character states, card games, traffic lights |
+| **Chain of Responsibility** | Pass request down a chain until handled | Decouples request sender from handler | Leave approvals, game damage handling, middleware |
 
 ---
