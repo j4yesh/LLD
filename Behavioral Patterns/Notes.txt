@@ -13,6 +13,9 @@ ans : create the different Strategy class implementing the Strategy interface
 
 q.real example
 ans : payment processors , navigation
+      Game character attack strategy
+      Warrior → sword attack, Archer → bow attack, Mage → magic attack.
+      Swap strategy at runtime.
 
 
 
@@ -32,8 +35,9 @@ ans: create the subject that maintains the list of observer. provides methods
      to add remove the observer and calls their notification method
 
 q.real world example?
-ans: Game development,Youtube,Stock market
-
+ans: Youtube,Stock market
+      Game event system
+      Player dies → UI updates,
 
 3.Command Pattern
 
@@ -52,7 +56,8 @@ ans : create a Command interface with execute() method. create concrete
       executes Command
 
 q.real world example?
-ans : Game development, Remote procedure call in IOT
+ans : Remote procedure call in IOT
+      Game controls -> MoveCommand, AttackCommand, JumpCommand
 
 4.Template Pattern
 
@@ -70,7 +75,7 @@ ans : create an abstract class that defines the template method
       which contains the skeleton of algorithm.
 
 q.real world example?
-ans : Game development , Algorithm implementations
+ans : Algorithm implementations
 
 5.State Pattern
 
@@ -92,3 +97,24 @@ ans : create the class for each state which is defines the behavior,
 
 q.real world example?
 ans : Programming card games like UNO,Rummy etc
+      Game character states
+      Idle → Running → Jumping → Falling → Dead
+
+6.Chain of Responsibility Pattern
+
+q.what is it?
+ans : pass the request in chain of handlers until one of the handler
+      handles it
+
+q.what problem does it solves?
+ans : giant if-else block if used to resolve the request. where logic
+      of handling request is tighly coupled
+
+q.how to implement?
+ans : main idea is one object says, if not able to resolve to it
+      i will pass to next. object are linked. if one of object unable
+      to resolve it will just pass to next
+
+q.real world example?
+ans : Leave approver system, Game Damage handler 
+      Attack -> Shield -> Armor -> Player
