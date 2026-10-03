@@ -5,18 +5,6 @@ enum ElevatorDir {
     idle, up, down
 }
 
-interface ElevatorStrategy {
-
-    int getNextFloor(int noOfFloor,
-            int curFloor,
-            ElevatorDir elevatorDir,
-            Queue<ElevatorReq> reqQueue);
-}
-
-interface ElevatorObserver {
-
-}
-
 class ElevatorReq {
 
     public int floor;
@@ -28,62 +16,151 @@ class ElevatorReq {
     }
 }
 
-class Elevator implements Runnable {
+class ElevatorRes {
 
+    public int floor;
+    public ElevatorDir direction;
+
+    public ElevatorRes(int floor, ElevatorDir direction) {
+        this.floor = floor;
+        this.direction = direction;
+    }
+}
+
+interface ElevatorStrategy extends Runnable{
+    void submitReq(ElevatorReq elevatorReq);
+    void setElevator(Elevator e);
+}
+
+class Display{
+    private static volatile Display instance;
+
+    public static Display getInstance() {
+        if(instance ==null){
+            synchronized (Display.class) {
+                if(instance == null){
+                    instance = new Display();
+                }
+            }
+            return instance;
+        }
+        return instance;
+    }
+
+    public void notifySignal(String msg){
+        System.out.println(msg);
+    }
+
+    public void notifyGoingFromTo(int curFloor,ElevatorDir elevatorDir,int nextFloor){
+    
+            this.notifySignal("Currently at "+curFloor+" Going "+elevatorDir+" "+"for the "+nextFloor+" floor");
+        
+    }
+    public void notifyArrival(int curFloor,ElevatorDir elevatorDir){
+            this.notifySignal("Arrived at the "+curFloor+ " ,direction"+elevatorDir);
+        
+    }
+
+    public void notifyReqReceived(ElevatorReq elevatorReq){
+            this.notifySignal("Just received the request for floor : "+elevatorReq.floor+" ,Dir. "+elevatorReq.direction);
+    }
+
+    public void notifyIdle(int floor){
+                 this.notifySignal("Elevator is Idle at floor : "+floor);
+    }
+}
+
+
+class FCFSstrategy implements ElevatorStrategy{
+    Elevator elevator;
+
+    public void setElevator(Elevator elevator){
+        this.elevator = elevator;
+    }
+
+    @Override
+    public void run(){
+        while (elevator.isRunning) {
+            try {
+                synchronized (this) {
+                    if(elevator.reqQueue.isEmpty()){
+                        Display.getInstance().notifyIdle(elevator.curFloor);
+                        wait();
+                    }
+                    ElevatorReq elevatorReq = elevator.reqQueue.poll();
+                    Display.getInstance().notifyGoingFromTo(elevator.curFloor, elevatorReq.direction, elevatorReq.floor);
+                    int time=5;
+                    while(time-->0){
+                        Thread.sleep(1000);
+                        // Display.getInstance().notifySignal(time+"sec remaining");
+                    }
+                    this.elevator.curFloor=elevatorReq.floor;
+                    this.elevator.elevatorDir = elevatorReq.direction;
+                }
+
+            } catch (Exception e) {
+                System.out.print(e.getMessage());
+            }
+        }
+    }
+
+    public void submitReq(ElevatorReq elevatorReq){
+        synchronized (this) {
+            elevator.reqQueue.add(elevatorReq);
+            notify();
+        }
+        Display.getInstance().notifyReqReceived(elevatorReq);
+    }
+}
+
+class Elevator {
     ElevatorStrategy elevatorStrategy;
-    List<ElevatorObserver> elevatorObserver;
     int noOfFloor;
     int curFloor;
-    boolean isRunning = true;
+    volatile boolean isRunning = true;
     ElevatorDir elevatorDir;
     Queue<ElevatorReq> reqQueue;
 
     Elevator(int noOfFloor, int curFloor) {
         this.noOfFloor = noOfFloor;
+        this.curFloor = curFloor;
         this.elevatorDir = ElevatorDir.idle;
         this.reqQueue = new LinkedList<>();
     }
 
-    void addObserver(ElevatorObserver elevatorObserver) {
-        this.elevatorObserver.add(elevatorObserver);
-    }
-
-    void removeObserver(ElevatorObserver elevatorObserver) {
-        this.elevatorObserver.remove(elevatorObserver);
+    void submitReq(ElevatorReq elevatorReq){
+        this.elevatorStrategy.submitReq(elevatorReq);
     }
 
     void setElevatorStrategy(ElevatorStrategy elevatorStrategy) {
         this.elevatorStrategy = elevatorStrategy;
-    }
-
-    void addRequest(ElevatorReq elevatorReq) {
-        this.reqQueue.add(elevatorReq);
-    }
-
-    @Override
-    public void run() {
-        // we have to make this thread safe
-        while (isRunning) {
-            int nextFloor = this.elevatorStrategy.getNextFloor(noOfFloor,
-                    curFloor,
-                    elevatorDir,
-                    reqQueue);
-            this.notifyGoingFromTo(curFloor, elevatorDir, nextFloor);
-            Thread.sleep(3000);
-            this.curFloor = nextFloor;
-            this.notifyArrival(this.curFloor);
-        }
+        this.elevatorStrategy.setElevator(this);
+        new Thread(this.elevatorStrategy).start();
     }
 
 }
 
+
 class ElevatorSystem {
 
     public static void main(String[] jayesh) {
-        // strategy for lift schedulling
-        // observer for the display
-        // command for the request
+        // command for the request Done
+        // singletone for the display Done
+        // strategy for lift scheduling -> Lets get with FCFS -> FCFS Done
+        // strategy for lift scheduling -> LOOK
+        // Request submission , will put in same shared Queue
         // multithreading 
-
+        Elevator elevator = new Elevator(10,2);
+        ElevatorStrategy elevatorStrategy = new FCFSstrategy();
+        elevator.setElevatorStrategy(elevatorStrategy);
+        // elevator.submitReq(new ElevatorReq(8,ElevatorDir.up));
+        // elevator.submitReq(new ElevatorReq(5,ElevatorDir.up));
+        // elevator.submitReq(new ElevatorReq(7,ElevatorDir.up));
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            int floor = sc.nextInt();
+            String direction = sc.next();
+            elevator.submitReq(new ElevatorReq(floor,direction.equals("up")?ElevatorDir.up:ElevatorDir.down));
+        }
     }
 }
