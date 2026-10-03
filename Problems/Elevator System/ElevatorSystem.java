@@ -16,16 +16,6 @@ class ElevatorReq {
     }
 }
 
-class ElevatorRes {
-
-    public int floor;
-    public ElevatorDir direction;
-
-    public ElevatorRes(int floor, ElevatorDir direction) {
-        this.floor = floor;
-        this.direction = direction;
-    }
-}
 
 interface ElevatorStrategy extends Runnable{
     void submitReq(ElevatorReq elevatorReq);
@@ -79,28 +69,46 @@ class FCFSstrategy implements ElevatorStrategy{
     }
 
     @Override
-    public void run(){
+    public void run() {
         while (elevator.isRunning) {
-            try {
-                synchronized (this) {
-                    if(elevator.reqQueue.isEmpty()){
+            ElevatorReq req;
+
+            synchronized (this) {
+                while (elevator.reqQueue.isEmpty() && elevator.isRunning) {
+                    try {
                         Display.getInstance().notifyIdle(elevator.curFloor);
                         wait();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return;
                     }
-                    ElevatorReq elevatorReq = elevator.reqQueue.poll();
-                    Display.getInstance().notifyGoingFromTo(elevator.curFloor, elevatorReq.direction, elevatorReq.floor);
-                    int time=5;
-                    while(time-->0){
-                        Thread.sleep(1000);
-                        // Display.getInstance().notifySignal(time+"sec remaining");
-                    }
-                    this.elevator.curFloor=elevatorReq.floor;
-                    this.elevator.elevatorDir = elevatorReq.direction;
                 }
 
-            } catch (Exception e) {
-                System.out.print(e.getMessage());
+                if (!elevator.isRunning) {
+                    return;
+                }
+
+                req = elevator.reqQueue.poll();
             }
+
+            // Lock released: accept new requests while moving.
+            Display.getInstance().notifyGoingFromTo(
+                elevator.curFloor, req.direction, req.floor
+            );
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+
+            elevator.curFloor = req.floor;
+            elevator.elevatorDir = req.direction;
+
+            Display.getInstance().notifyArrival(
+                elevator.curFloor, elevator.elevatorDir
+            );
         }
     }
 
@@ -160,7 +168,18 @@ class ElevatorSystem {
         while(true){
             int floor = sc.nextInt();
             String direction = sc.next();
-            elevator.submitReq(new ElevatorReq(floor,direction.equals("up")?ElevatorDir.up:ElevatorDir.down));
+            if (floor < 0 || floor > elevator.noOfFloor) {
+                System.out.println("Invalid floor");
+                continue;
+            }
+
+            if (direction.equalsIgnoreCase("up")) {
+                elevator.submitReq(new ElevatorReq(floor, ElevatorDir.up));
+            } else if (direction.equalsIgnoreCase("down")) {
+                elevator.submitReq(new ElevatorReq(floor, ElevatorDir.down));
+            } else {
+                System.out.println("Invalid direction. Use up or down.");
+            }
         }
     }
 }
