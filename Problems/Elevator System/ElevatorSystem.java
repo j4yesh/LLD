@@ -124,9 +124,9 @@ class FCFSstrategy implements ElevatorStrategy{
 class Elevator {
     ElevatorStrategy elevatorStrategy;
     int noOfFloor;
-    int curFloor;
+    volatile int curFloor;
     volatile boolean isRunning = true;
-    ElevatorDir elevatorDir;
+    volatile ElevatorDir elevatorDir;
     Queue<ElevatorReq> reqQueue;
 
     Elevator(int noOfFloor, int curFloor) {
