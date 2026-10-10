@@ -1,0 +1,16 @@
+1.Adapter Pattern
+
+q.what is it?
+ans: act as bridge between two incompetable interface to work together by converting
+    the interface of existing class into client expects
+
+q.what problem does it solves?
+ans: it solves the incompatiblility between existing class and client code that wants to 
+    use them
+
+q.how does it works?
+ans : pass the instance of target object in Adapter object, define the methods
+    where are simply calling the couple of methods accordingly
+
+q.real world example?
+ans: Payment Gateaways,Legacy logger,Media Player
