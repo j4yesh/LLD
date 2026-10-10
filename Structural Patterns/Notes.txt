@@ -14,3 +14,21 @@ ans : pass the instance of target object in Adapter object, define the methods
 
 q.real world example?
 ans: Payment Gateaways,Legacy logger,Media Player
+
+2.Composite Pattern
+
+q.what is it?
+ans : allows to control the complex hierachies , control the set of object in 
+         unified way
+
+q.what problem does it solve?
+ans: tidious to control the hierachies of object
+
+q.how does it works?
+ans: maintain the unified interface for both indivisual objects and groups,where the 
+    composite class stores a collection of objects implementing that interface. implement
+    the methods that iterate through the children and invoke the relevant operations,
+    allowing indivisual objects and group to be controll uniformly
+
+q.real world example
+ans : to control the behavior of NPCs in game
