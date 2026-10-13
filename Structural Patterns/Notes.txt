@@ -69,3 +69,19 @@ Note: Decorator make it easy to add the functionality dynamically, but removing
     specific decorator from an already wrapped object is directly supported by Pattern
     to solve it 1.rebuild decorator chain
                 2.use removable ability another class which will add/remove ability
+
+5.Proxy Pattern
+
+q.what is it?
+ans : we introduce the intermediate class which will fed our req indirectly
+      from actual actual, which act as gatekeeper
+
+q.what problem does it solve?
+ans : can we have any layer which will help to access the base object in 
+        appropriate manner?
+
+q.how to implement?
+ans : just maintain the intermediate class access the it accordingly
+
+q.real world example?
+ans : firewall proxies,cahing proxies
