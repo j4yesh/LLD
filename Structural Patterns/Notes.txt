@@ -48,3 +48,24 @@ ans : create the facade class which will hold the instance of
 
 q.real world example?
 ans : Media player, Game Environment Manager
+
+
+4.Decorator Pattern
+
+q.what is it?
+ans : allows to control the functionality of objects dynamically
+
+q.what problem does it solve?
+ans : how to add new functionality to object without altering their code 
+
+q.how does it works?
+ans : define common interface for base class,using Decorators to wrap objects,
+    adding new behavior while preserving original object interface
+
+q.real world example?
+ans : alter the behavior of NPCs in a game,Coffee ordering,Java I/O BufferInputStream
+
+Note: Decorator make it easy to add the functionality dynamically, but removing 
+    specific decorator from an already wrapped object is directly supported by Pattern
+    to solve it 1.rebuild decorator chain
+                2.use removable ability another class which will add/remove ability
