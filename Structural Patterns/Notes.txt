@@ -32,3 +32,19 @@ ans: maintain the unified interface for both indivisual objects and groups,where
 
 q.real world example
 ans : to control the behavior of NPCs in game
+
+3.Facade Pattern
+
+q.what is it?
+ans : gives single point of access for the subsystem
+
+q.what problem does it solve?
+ans : want to manage the multiple things from single point,hide complexity
+    and provide clean and simplified interface
+
+q.how does it works?
+ans : create the facade class which will hold the instance of 
+        sysystem object and use them accordingly
+
+q.real world example?
+ans : Media player, Game Environment Manager
