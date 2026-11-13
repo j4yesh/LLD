@@ -1,6 +1,5 @@
 import java.util.*;
-import Interface.WritePolicy;
-import Interface.EvictionPolicy;
+import Interface.*;
 
 class Cache<K, V> {
 
@@ -44,7 +43,7 @@ class CacheSystem {
         // return
 
         // writing policy
-        // ->write through
+        // ->write through -> picked
         // ->write back
         // ->write around
 
