@@ -10,8 +10,8 @@ class Cache<K, V> {
 
     Cache(CacheStorage<K, V> cacheStorage,
             DBStorage<K, V> dbStorage,
-            EvictionPolicy evictionPol,
-            WritePolicy writePolicyicy) {
+            EvictionPolicy evictionPolicy,
+            WritePolicy writePolicy) {
         this.evictionPolicy = evictionPolicy;
         this.writePolicy = writePolicy;
         this.cacheStorage = cacheStorage;
