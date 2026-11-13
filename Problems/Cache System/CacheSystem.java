@@ -1,8 +1,41 @@
+import java.util.*;
+import Interface.WritePolicy;
+import Interface.EvictionPolicy;
+
+class Cache<K, V> {
+
+    EvictionPolicy evictionPolicy;
+    WritePolicy writePolicy;
+    CacheStorage<K, V> cacheStorage;
+    DBStorage<K, V> dbStorage;
+
+    Cache(CacheStorage<K, V> cacheStorage,
+            DBStorage<K, V> dbStorage,
+            EvictionPolicy evictionPol,
+            WritePolicy writePolicyicy) {
+        this.evictionPolicy = evictionPolicy;
+        this.writePolicy = writePolicy;
+        this.cacheStorage = cacheStorage;
+        this.dbStorage = dbStorage;
+    }
+
+    V get(K key) {
+        return null;
+    }
+
+    void put(K key, V value) {
+
+    }
+
+}
 
 class CacheSystem {
 
     public static void main(String[] jayesh) {
         System.out.println("Initiating the Cache system");
+
+        Cache cache = new Cache();
+
         // get / put
         // req comes to server
         // if hit welldone
@@ -11,7 +44,7 @@ class CacheSystem {
         // return
 
         // writing policy
-        // ->write throgh
+        // ->write through
         // ->write back
         // ->write around
 
