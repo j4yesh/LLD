@@ -26,11 +26,15 @@ class Cache<K, V> {
         V val = cacheStorage.get(key);
         if (val == null) {
             System.out.println("MISS");
-            // miss
             val = dbStorage.get(key);
-            System.out.println("getting val from DB "+val);
-            if(val == null)return null;
-            System.out.println("putting the val in DB");
+            System.out.println("getting val from DB " + val);
+            if (val == null) return null;
+            if (cacheStorage.size() >= size) {
+                K toRemove = evictionPolicy.getEvictKey();
+                System.out.println("evicting key " + toRemove);
+                cacheStorage.remove(toRemove);
+            }
+            System.out.println("putting the val in cache");
             cacheStorage.put(key, val);
         }
         evictionPolicy.keyAccessed(key, val);
@@ -38,13 +42,13 @@ class Cache<K, V> {
     }
 
     void put(K key, V value) {
-        if(cacheStorage.size()>=3){
+        if (cacheStorage.get(key) == null && cacheStorage.size() >= size) {
             System.out.println("Size Reached ");
             K toRemove = evictionPolicy.getEvictKey();
-            System.out.println("key to evict "+toRemove);
-            cacheStorage.remove(toRemove);     
+            System.out.println("key to evict " + toRemove);
+            cacheStorage.remove(toRemove);
         }
-        System.out.println("Writing the key val in DB and Cache"+" key: "+key+" "+" val: "+value);
+        System.out.println("Writing the key val in DB and Cache" + " key: " + key + "  val: " + value);
         writePolicy.put(key, value);
         System.out.println("");
         evictionPolicy.keyAccessed(key, value);
@@ -66,6 +70,33 @@ class CacheSystem {
 
         Cache<String,Integer> cache = new Cache<String,Integer>(cacheStorage, dbStorage, evictionPolicy, writeThorughPolicy);
 
+        System.out.println("=== PUT a=1, b=2, c=3 (fill cache) ===");
+        cache.put("a", 1);
+        cache.put("b", 2);
+        cache.put("c", 3);
+
+        System.out.println("=== GET a (should HIT) ===");
+        System.out.println("Result: " + cache.get("a"));
+
+        System.out.println("=== PUT d=4 (cache full, should evict b - LRU) ===");
+        cache.put("d", 4);
+
+        System.out.println("=== GET b (should MISS, evicted, fetch from DB) ===");
+        System.out.println("Result: " + cache.get("b"));
+
+        System.out.println("=== GET d (should HIT) ===");
+        System.out.println("Result: " + cache.get("d"));
+
+        System.out.println("=== GET z (never inserted, should MISS, null) ===");
+        System.out.println("Result: " + cache.get("z"));
+
+        System.out.println("=== PUT a=99 (overwrite, no eviction needed) ===");
+        cache.put("a", 99);
+
+        System.out.println("=== GET a (should HIT, value=99) ===");
+        System.out.println("Result: " + cache.get("a"));
+
+        /*
         Scanner sc = new Scanner(System.in);
         while(true){
             System.out.print("Enter action (put/get/exit): ");

@@ -43,6 +43,7 @@ public class LRUEvictionPolicy<K, V> implements EvictionPolicy<K, V> {
             target.right.left = target.left;
         } else {
             target = new DoublyLinkedList<>();
+            target.key = key;
             target.val = val;
             hashMap.put(key, target);
         }
