@@ -17,5 +17,9 @@ public class HashMapCacheStorage<K, V> implements CacheStorage<K, V> {
     public void put(K key, V value) {
         cache.put(key, value);
     }
-}
 
+    @Override
+    public void remove(K key) {
+        cache.remove(key);
+    }
+}

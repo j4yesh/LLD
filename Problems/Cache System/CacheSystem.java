@@ -1,4 +1,6 @@
 import java.util.*;
+
+import Implementation.*;
 import Interface.*;
 
 class Cache<K, V> {
@@ -33,7 +35,14 @@ class CacheSystem {
     public static void main(String[] jayesh) {
         System.out.println("Initiating the Cache system");
 
-        Cache cache = new Cache();
+        EvictionPolicy<String, Integer> evictionPolicy = new LRUEvictionPolicy<String, Integer>();
+        CacheStorage<String, Integer> cacheStorage = new HashMapCacheStorage<String, Integer>();
+        DBStorage<String, Integer> dbStorage = new HashMapDBStorage<String, Integer>();
+        WriteThrough<String, Integer> writeThorughPolicy = new WriteThrough<String, Integer>(
+                dbStorage,
+                cacheStorage);
+
+        Cache cache = new Cache<>(cacheStorage, dbStorage, evictionPolicy, null);
 
         // get / put
         // req comes to server

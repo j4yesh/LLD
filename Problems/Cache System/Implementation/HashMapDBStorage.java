@@ -17,5 +17,9 @@ public class HashMapDBStorage<K, V> implements DBStorage<K, V> {
     public void put(K key, V value) {
         storage.put(key, value);
     }
-}
 
+    @Override
+    public void remove(K key) {
+        storage.remove(key);
+    }
+}

@@ -1,9 +1,9 @@
 package Interface;
 
-public interface EvictionPolicy<K> {
+public interface EvictionPolicy<K, V> {
 
     K getEvictKey();
 
-    void keyAccessed(K key);
+    void keyAccessed(K key, V val);
 
 }
