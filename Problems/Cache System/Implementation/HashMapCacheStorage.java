@@ -10,7 +10,7 @@ public class HashMapCacheStorage<K, V> implements CacheStorage<K, V> {
 
     @Override
     public V get(K key) {
-        return cache.get(key);
+        return cache.getOrDefault(key, null);
     }
 
     @Override
@@ -21,5 +21,10 @@ public class HashMapCacheStorage<K, V> implements CacheStorage<K, V> {
     @Override
     public void remove(K key) {
         cache.remove(key);
+    }
+
+    @Override
+    public int size() {
+        return cache.size();
     }
 }

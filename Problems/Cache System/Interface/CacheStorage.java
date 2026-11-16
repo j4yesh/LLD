@@ -6,4 +6,6 @@ public interface CacheStorage<K, V> {
     void put(K key, V value);
 
     void remove(K key);
+
+    int size();
 }
