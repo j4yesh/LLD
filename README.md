@@ -27,6 +27,14 @@ Welcome to my LLD repository! This workspace contains my notes, explorations, an
   - [5. State Pattern](#5-state-pattern)
   - [6. Chain of Responsibility Pattern](#6-chain-of-responsibility-pattern)
 - [Behavioral Summary Table](#behavioral-summary-table)
+- [Structural Design Patterns](#structural-design-patterns)
+  - [Overview & Quick Links](#overview--quick-links-2)
+  - [1. Adapter Pattern](#1-adapter-pattern)
+  - [2. Composite Pattern](#2-composite-pattern)
+  - [3. Facade Pattern](#3-facade-pattern)
+  - [4. Decorator Pattern](#4-decorator-pattern)
+  - [5. Proxy Pattern](#5-proxy-pattern)
+- [Structural Summary Table](#structural-summary-table)
 
 ---
 
@@ -291,5 +299,126 @@ Behavioral design patterns focus on how objects talk to each other. Instead of t
 | **Template** | Define algorithm skeleton, override specific steps | Avoids code duplication across similar workflows | Algorithm implementations, data processing pipelines |
 | **State** | Behavior changes based on current state | No cluttered if-else state checks | Game character states, card games, traffic lights |
 | **Chain of Responsibility** | Pass request down a chain until handled | Decouples request sender from handler | Leave approvals, game damage handling, middleware |
+
+---
+
+## Structural Design Patterns
+
+Structural design patterns focus on how objects and classes are composed to form larger structures. Instead of building complex tightly-coupled systems, these patterns help organize relationships between objects in a clean and flexible way.
+
+### Overview & Quick Links
+
+| Pattern | What it does | Java Code |
+| :--- | :--- | :--- |
+| **Adapter Pattern** | Acts as a bridge between two incompatible interfaces so they can work together. | [`Adapter.java`](./Structural%20Patterns/Adapter.java) |
+| **Composite Pattern** | Treats individual objects and groups of objects uniformly through a shared interface. | [`Composite.java`](./Structural%20Patterns/Composite.java) |
+| **Facade Pattern** | Provides a single simplified entry point to a complex subsystem. | [`Facade.java`](./Structural%20Patterns/Facade.java) |
+| **Decorator Pattern** | Dynamically adds new behavior to objects without altering their code. | [`Decorator.java`](./Structural%20Patterns/Decorator.java) |
+| **Proxy Pattern** | Introduces an intermediate class that controls access to the actual object. | [`Proxy.java`](./Structural%20Patterns/Proxy.java) |
+| **My Raw Notes** | Original notes file. | [`Notes.txt`](./Structural%20Patterns/Notes.txt) |
+
+---
+
+### 1. Adapter Pattern
+
+#### **Q. What is the Adapter Pattern?**
+**Ans:** A structural design pattern that acts as a bridge between two incompatible interfaces, converting the interface of an existing class into one that the client expects.
+
+#### **Q. What problem does it solve?**
+**Ans:** It solves the incompatibility between existing classes and client code that wants to use them, without modifying either side.
+
+#### **Q. How is it implemented?**
+**Ans:** Pass the instance of the target object into an Adapter class. Define methods in the adapter that internally call the appropriate methods on the wrapped object, translating the interface.
+
+#### **Q. Real-world example?**
+**Ans:** Payment gateways, legacy logger integration, or media players supporting different formats.
+
+> **Code:** [`Adapter.java`](./Structural%20Patterns/Adapter.java)
+
+---
+
+### 2. Composite Pattern
+
+#### **Q. What is the Composite Pattern?**
+**Ans:** A structural design pattern that allows you to control complex hierarchies by treating individual objects and groups of objects in a unified way.
+
+#### **Q. What problem does it solve?**
+**Ans:** Managing tree-like hierarchies of objects becomes tedious when you have to distinguish between individual items and groups at every level.
+
+#### **Q. How is it implemented?**
+**Ans:** Maintain a unified interface for both individual objects and composites. The composite class stores a collection of children implementing that interface and implements methods that iterate through children and invoke the relevant operations — allowing individual objects and groups to be controlled uniformly.
+
+#### **Q. Real-world example?**
+**Ans:** Controlling the behavior of NPCs in a game, file system directories, or UI component trees.
+
+> **Code:** [`Composite.java`](./Structural%20Patterns/Composite.java)
+
+---
+
+### 3. Facade Pattern
+
+#### **Q. What is the Facade Pattern?**
+**Ans:** A structural design pattern that gives a single, simplified point of access to a complex subsystem.
+
+#### **Q. What problem does it solve?**
+**Ans:** When you want to manage multiple subsystem components from a single point, hiding complexity and providing a clean, simplified interface to the client.
+
+#### **Q. How is it implemented?**
+**Ans:** Create a facade class that holds instances of the subsystem objects and exposes simple methods that internally coordinate calls to them.
+
+#### **Q. Real-world example?**
+**Ans:** Media players (play/pause hides audio, video, subtitle subsystems), game environment managers, or home theater systems.
+
+> **Code:** [`Facade.java`](./Structural%20Patterns/Facade.java)
+
+---
+
+### 4. Decorator Pattern
+
+#### **Q. What is the Decorator Pattern?**
+**Ans:** A structural design pattern that allows you to add or modify the functionality of objects dynamically at runtime.
+
+#### **Q. What problem does it solve?**
+**Ans:** How to add new functionality to an object without altering its code or creating an explosion of subclasses.
+
+#### **Q. How is it implemented?**
+**Ans:** Define a common interface for the base class. Create Decorator classes that wrap objects and add new behavior while preserving the original object's interface. Decorators can be stacked.
+
+#### **Q. Real-world example?**
+**Ans:** Altering NPC behavior in a game, coffee ordering (add milk, sugar, whipped cream), or Java I/O streams (`BufferedInputStream` wrapping `FileInputStream`).
+
+> **Note:** Decorator makes it easy to add functionality dynamically, but removing a specific decorator from an already-wrapped object is not directly supported. Solutions: (1) rebuild the decorator chain, or (2) use a separate manager class that tracks and can add/remove abilities.
+
+> **Code:** [`Decorator.java`](./Structural%20Patterns/Decorator.java)
+
+---
+
+### 5. Proxy Pattern
+
+#### **Q. What is the Proxy Pattern?**
+**Ans:** A structural design pattern that introduces an intermediate class which acts as a gatekeeper, controlling access to the actual object.
+
+#### **Q. What problem does it solve?**
+**Ans:** When you need a layer that controls how the base object is accessed — for security, caching, lazy loading, or logging purposes.
+
+#### **Q. How is it implemented?**
+**Ans:** Create an intermediate class that implements the same interface as the real object. The proxy holds a reference to the real object and adds control logic (access checks, caching, logging) before or after delegating calls to it.
+
+#### **Q. Real-world example?**
+**Ans:** Firewall proxies, caching proxies, or virtual proxies for lazy-loading heavy resources.
+
+> **Code:** [`Proxy.java`](./Structural%20Patterns/Proxy.java)
+
+---
+
+## Structural Summary Table
+
+| Pattern | In Simple Words | Main Benefit | When to Use |
+| :--- | :--- | :--- | :--- |
+| **Adapter** | Translates one interface to another | Makes incompatible classes work together | Integrating legacy code, third-party libraries, payment gateways |
+| **Composite** | Treats one and many the same way | Uniform control over tree hierarchies | File systems, UI trees, game entity groups |
+| **Facade** | One simple entry point to a complex system | Hides subsystem complexity from client | Media players, game managers, home automation |
+| **Decorator** | Wraps objects to add behavior dynamically | No subclass explosion, stackable features | Coffee toppings, NPC abilities, Java I/O streams |
+| **Proxy** | Gatekeeper that controls access to real object | Adds security, caching, or lazy loading transparently | Firewalls, caching layers, access control |
 
 ---
