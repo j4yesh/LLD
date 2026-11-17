@@ -16,7 +16,7 @@ public class GameBoard{
         this.playerBBoard = utils.deepCopy(playerBBoard);
     }
 
-    public void assign(int playerAint Idx,playerBIdx){
+    public void assign(int playerAIdx, int playerBIdx) {
         this.setBoardsDeepClone(ShipArrangement.arrangements.get(playerAIdx),
         ShipArrangement.arrangements.get(playerBIdx));
     }

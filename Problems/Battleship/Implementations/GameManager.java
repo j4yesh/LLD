@@ -12,7 +12,7 @@ public class GameManager {
         this.gameBoard = gameBoard;
         this.currentMove = currentMove;
         this.playerA = playerA;
-        thils.playerB = playerB;
+        this.playerB = playerB;
 
     }
 
@@ -21,30 +21,32 @@ public class GameManager {
         while (true) {
             if (currentMove == CurrentMove.PLAYERA) {
                 Display.printStr("PLAYER A making the move");
-                Display.showBoardForPlayerA();
+                Display.showBoardForPlayerA(gameBoard);
 
-                cell target = playerA.playMove();
-                while (!Validator.isValidA(target, board)) {
+                Cell target = playerA.playMove();
+                while (!Validator.isValidA(target, gameBoard)) {
                     Display.printStr("Invalid Move");
                     target = playerA.playMove();
                 }
-                this.MissileByA(cell);
+                this.missileByA(target);
                 if (this.checkWin()) {
                     System.out.println("PLAYER A is a winner");
+                    break;
                 }
                 currentMove = CurrentMove.PLAYERB;
             } else {
                 Display.printStr("PLAYER B making the move");
-                Display.showBoardForPlayerB();
+                Display.showBoardForPlayerB(gameBoard);
 
-                cell target = playerB.playMove();
-                while (!Validator.isValidB(target, board)) {
+                Cell target = playerB.playMove();
+                while (!Validator.isValidB(target, gameBoard)) {
                     Display.printStr("Invalid Move");
                     target = playerB.playMove();
                 }
-                this.MissileByB(cell);
+                this.missileByB(target);
                 if (this.checkWin()) {
                     System.out.println("PLAYER B is a winner");
+                    break;
                 }
 
                 currentMove = CurrentMove.PLAYERA;
@@ -66,8 +68,44 @@ public class GameManager {
         Display.printStr("Both the player has Arranged the ship");
     }
 
-    private void checkWin() {
-
+    private void missileByA(Cell target) {
+        char current = gameBoard.playerBBoard.get(target.row).get(target.col);
+        if (current == 's') {
+            gameBoard.playerBBoard.get(target.row).set(target.col, 'x');
+            Display.printStr("HIT!");
+        } else {
+            gameBoard.playerBBoard.get(target.row).set(target.col, 'o');
+            Display.printStr("MISS!");
+        }
     }
 
+    private void missileByB(Cell target) {
+        char current = gameBoard.playerABoard.get(target.row).get(target.col);
+        if (current == 's') {
+            gameBoard.playerABoard.get(target.row).set(target.col, 'x');
+            Display.printStr("HIT!");
+        } else {
+            gameBoard.playerABoard.get(target.row).set(target.col, 'o');
+            Display.printStr("MISS!");
+        }
+    }
+
+    private boolean checkWin() {
+        if (currentMove == CurrentMove.PLAYERA) {
+            return allShipsSunk(gameBoard.playerBBoard);
+        } else {
+            return allShipsSunk(gameBoard.playerABoard);
+        }
+    }
+
+    private boolean allShipsSunk(java.util.List<java.util.List<Character>> board) {
+        for (java.util.List<Character> row : board) {
+            for (char c : row) {
+                if (c == 's') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
