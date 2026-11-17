@@ -1,49 +1,49 @@
 
-public class GameManager{
+public class GameManager {
     private GameBoard gameBoard;
     private CurrentMove currentMove;
     private IPlayerStrategy playerA;
     private IPlayerStrategy playerB;
 
     GameManager(GameBoard gameBoard,
-                CurrentMove currentMove,
-                IPlayerStrategy playerA,
-                IPlayerStrategy playerB){
+            CurrentMove currentMove,
+            IPlayerStrategy playerA,
+            IPlayerStrategy playerB) {
         this.gameBoard = gameBoard;
         this.currentMove = currentMove;
-        this.playerA=playerA;
-        thils.playerB=playerB;
-        
+        this.playerA = playerA;
+        thils.playerB = playerB;
+
     }
 
-    public void start(){
+    public void start() {
         this.arrangeShip();
-        while(true){
-            if(currentMove == CurrentMove.PLAYERA){
-                Display.printStr("PLAYER A making the move"); 
-                Display.showBoardForPlayerA();   
+        while (true) {
+            if (currentMove == CurrentMove.PLAYERA) {
+                Display.printStr("PLAYER A making the move");
+                Display.showBoardForPlayerA();
 
                 cell target = playerA.playMove();
-                while(!validator.isValidA(target,board)){
+                while (!Validator.isValidA(target, board)) {
                     Display.printStr("Invalid Move");
-                    cell target = playerA.playMove();
+                    target = playerA.playMove();
                 }
                 this.MissileByA(cell);
-                if(this.checkWin()){
+                if (this.checkWin()) {
                     System.out.println("PLAYER A is a winner");
                 }
                 currentMove = CurrentMove.PLAYERB;
-            }else{  
+            } else {
                 Display.printStr("PLAYER B making the move");
-                Display.showBoardForPlayerB();   
+                Display.showBoardForPlayerB();
 
                 cell target = playerB.playMove();
-                while(!validator.isValidB(target,board)){
+                while (!Validator.isValidB(target, board)) {
                     Display.printStr("Invalid Move");
-                    cell target = playerB.playMove();
+                    target = playerB.playMove();
                 }
                 this.MissileByB(cell);
-                if(this.checkWin()){
+                if (this.checkWin()) {
                     System.out.println("PLAYER B is a winner");
                 }
 
@@ -52,23 +52,22 @@ public class GameManager{
         }
     }
 
-    private void arrangeShip(){
-            Display.printStr("PLAYER A Selecting the arrangement");
-            Display.printArrangements();
-            int playerAChoice = playerA.selectArrangement();
+    private void arrangeShip() {
+        Display.printStr("PLAYER A Selecting the arrangement");
+        Display.printArrangements();
+        int playerAChoice = playerA.selectArrangement();
 
-            Display.printStr("PLAYER B Selecting the arrangement");
-            Display.printArrangements();
-            int playerBChoice = playerB.selectArrangement();
-            
-            gameBoard.assign(playerAChoice, playerBChoice);    
+        Display.printStr("PLAYER B Selecting the arrangement");
+        Display.printArrangements();
+        int playerBChoice = playerB.selectArrangement();
 
-            Display.printStr("Both the player has Arranged the ship");
+        gameBoard.assign(playerAChoice, playerBChoice);
+
+        Display.printStr("Both the player has Arranged the ship");
     }
 
-    private void checkWin(){
+    private void checkWin() {
 
     }
-
 
 }
