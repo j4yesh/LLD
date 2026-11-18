@@ -1,3 +1,6 @@
-public enum CurrentMove{
-    PLAYERA,PLAYERB;
+package Enums;
+
+public enum CurrentMove {
+    PLAYERA,
+    PLAYERB;
 }

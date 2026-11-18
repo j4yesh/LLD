@@ -1,4 +1,7 @@
+package Implementations;
+
 import java.util.List;
+import Statics.ShipArrangement;
 
 public class Display {
 

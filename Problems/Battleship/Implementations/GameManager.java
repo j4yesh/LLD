@@ -1,3 +1,8 @@
+package Implementations;
+
+import java.util.List;
+import Enums.CurrentMove;
+import Interface.IPlayerStrategy;
 
 public class GameManager {
     private GameBoard gameBoard;
@@ -5,7 +10,7 @@ public class GameManager {
     private IPlayerStrategy playerA;
     private IPlayerStrategy playerB;
 
-    GameManager(GameBoard gameBoard,
+    public GameManager(GameBoard gameBoard,
             CurrentMove currentMove,
             IPlayerStrategy playerA,
             IPlayerStrategy playerB) {
@@ -13,7 +18,6 @@ public class GameManager {
         this.currentMove = currentMove;
         this.playerA = playerA;
         this.playerB = playerB;
-
     }
 
     public void start() {
@@ -98,8 +102,8 @@ public class GameManager {
         }
     }
 
-    private boolean allShipsSunk(java.util.List<java.util.List<Character>> board) {
-        for (java.util.List<Character> row : board) {
+    private boolean allShipsSunk(List<List<Character>> board) {
+        for (List<Character> row : board) {
             for (char c : row) {
                 if (c == 's') {
                     return false;

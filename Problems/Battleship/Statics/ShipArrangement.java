@@ -1,32 +1,35 @@
-import java.util.*;
+package Statics;
+
+import java.util.ArrayList;
 
 public class ShipArrangement {
-
+    public static int m = 5;
+    public static int n = 5;
     public static ArrayList<ArrayList<ArrayList<Character>>> arrangements = new ArrayList<>();
 
     static {
-        arrangements.add(createBoard(new char[][]{
-            {'s', 's', 's', '_', '_'},
-            {'_', '_', '_', '_', 's'},
-            {'s', '_', '_', '_', 's'},
-            {'s', '_', 's', 's', '_'},
-            {'s', '_', '_', '_', 's'}
+        arrangements.add(createBoard(new char[][] {
+                { 's', 's', 's', '_', '_' },
+                { '_', '_', '_', '_', 's' },
+                { 's', '_', '_', '_', 's' },
+                { 's', '_', 's', 's', '_' },
+                { 's', '_', '_', '_', 's' }
         }));
 
-        arrangements.add(createBoard(new char[][]{
-            {'_', '_', 's', '_', '_'},
-            {'s', '_', 's', '_', 's'},
-            {'s', '_', 's', '_', 's'},
-            {'_', '_', '_', '_', '_'},
-            {'s', 's', '_', 's', 's'}
+        arrangements.add(createBoard(new char[][] {
+                { '_', '_', 's', '_', '_' },
+                { 's', '_', 's', '_', 's' },
+                { 's', '_', 's', '_', 's' },
+                { '_', '_', '_', '_', '_' },
+                { 's', 's', '_', 's', 's' }
         }));
 
-        arrangements.add(createBoard(new char[][]{
-            {'s', '_', '_', '_', 's'},
-            {'s', '_', 's', '_', 's'},
-            {'s', '_', 's', '_', '_'},
-            {'_', '_', 's', 's', 's'},
-            {'s', '_', '_', '_', '_'}
+        arrangements.add(createBoard(new char[][] {
+                { 's', '_', '_', '_', 's' },
+                { 's', '_', 's', '_', 's' },
+                { 's', '_', 's', '_', '_' },
+                { '_', '_', 's', 's', 's' },
+                { 's', '_', '_', '_', '_' }
         }));
     }
 

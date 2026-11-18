@@ -1,10 +1,15 @@
+package Implementations;
 
-public class GameBoard{
+import java.util.List;
+import Statics.ShipArrangement;
+import UTILS.utils;
+
+public class GameBoard {
     
     public List<List<Character>> playerABoard;
     public List<List<Character>> playerBBoard;
 
-    GameBoard(){
+    public GameBoard() {
 
     }
 
@@ -17,8 +22,9 @@ public class GameBoard{
     }
 
     public void assign(int playerAIdx, int playerBIdx) {
-        this.setBoardsDeepClone(ShipArrangement.arrangements.get(playerAIdx),
-        ShipArrangement.arrangements.get(playerBIdx));
+        this.setBoardsDeepClone(
+            ShipArrangement.arrangements.get(playerAIdx),
+            ShipArrangement.arrangements.get(playerBIdx)
+        );
     }
-
 }
