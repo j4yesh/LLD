@@ -1,15 +1,21 @@
+import Implementations.GameBoard;
+import Implementations.GameManager;
+import Implementations.HumanPlayerStrategy;
+import Implementations.BotPlayerStrategy;
+import Enums.CurrentMove;
+import Interface.IPlayerStrategy;
 
-class BattleShipGame {
-    public static void main(String[] jayesh) {
+public class BattleShipGame {
+    public static void main(String[] args) {
         GameBoard gameBoard = new GameBoard();
         CurrentMove currentMove = CurrentMove.PLAYERA;
         IPlayerStrategy playerA = new HumanPlayerStrategy();
-        playerA.setUsername("You");
-        playerB.setUsername("BOT");
+        IPlayerStrategy playerB = new BotPlayerStrategy();
         GameManager gameManager = new GameManager(
                 gameBoard,
                 currentMove,
                 playerA,
                 playerB);
+        gameManager.start();
     }
 }

@@ -1,32 +1,29 @@
-import java.util.Scanner;
+package Implementations;
+
+import java.util.Random;
+import Interface.IPlayerStrategy;
+import Statics.ShipArrangement;
 
 public class BotPlayerStrategy implements IPlayerStrategy {
-    Randrm Random = new Random();
-    String username;
+    private Random random = new Random();
 
-    Cell playMove() {
-        System.out.println(username + "s turn");
-        System.out.println("Enter the Co-Ordinate : ");
+    public BotPlayerStrategy() {
+    }
+
+    @Override
+    public Cell playMove() {
         int limitRow = ShipArrangement.m;
         int limitCol = ShipArrangement.n;
-        int row = random.nextInt(0, limitRow);
-        int col = random.nextInt(0, limitCol);
-        System.out.println(username + " Has selected " + row + " " + col);
+        int row = random.nextInt(limitRow);
+        int col = random.nextInt(limitCol);
+        System.out.println("Bot selected (" + row + ", " + col + ")");
         return new Cell(row, col);
     }
 
-    int selectArrangement() {
-        System.out.print("Input Arrangement : ");
+    @Override
+    public int selectArrangement() {
         int n = random.nextInt(ShipArrangement.arrangements.size());
-        System.out.println(username + " Has selected " + row + " " + n);
+        System.out.println("Bot selected arrangement ");
         return n;
-    }
-
-    void setUsername(String str) {
-        this.username = str;
-    }
-
-    String getUsername() {
-        return this.username;
     }
 }

@@ -1,11 +1,12 @@
 package Statics;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShipArrangement {
     public static int m = 5;
     public static int n = 5;
-    public static ArrayList<ArrayList<ArrayList<Character>>> arrangements = new ArrayList<>();
+    public static List<List<List<Character>>> arrangements = new ArrayList<>();
 
     static {
         arrangements.add(createBoard(new char[][] {
@@ -33,11 +34,11 @@ public class ShipArrangement {
         }));
     }
 
-    private static ArrayList<ArrayList<Character>> createBoard(char[][] board) {
-        ArrayList<ArrayList<Character>> result = new ArrayList<>();
+    private static List<List<Character>> createBoard(char[][] board) {
+        List<List<Character>> result = new ArrayList<>();
 
         for (char[] row : board) {
-            ArrayList<Character> list = new ArrayList<>();
+            List<Character> list = new ArrayList<>();
             for (char cell : row) {
                 list.add(cell);
             }

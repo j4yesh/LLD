@@ -1,28 +1,27 @@
+package Implementations;
+
 import java.util.Scanner;
+import Interface.IPlayerStrategy;
+import Statics.ShipArrangement;
 
 public class HumanPlayerStrategy implements IPlayerStrategy {
-    Scanner sc = new Scanner(System.in);
-    String username;
+    private Scanner sc = new Scanner(System.in);
 
-    Cell playMove() {
-        System.out.println(username + "s turn");
+    public HumanPlayerStrategy() {
+    }
+
+    @Override
+    public Cell playMove() {
         System.out.println("Enter the Co-Ordinate : ");
         int row = sc.nextInt();
         int col = sc.nextInt();
         return new Cell(row, col);
     }
 
-    int selectArrangement() {
-        System.out.print("Input Arrangement : ");
+    @Override
+    public int selectArrangement() {
+        System.out.print("Input Arrangement (1-" + ShipArrangement.arrangements.size() + ") : ");
         int n = sc.nextInt();
-        return n;
-    }
-
-    void setUsername(String str) {
-        this.username = str;
-    }
-
-    String getUsername() {
-        return this.username;
+        return n - 1;
     }
 }
