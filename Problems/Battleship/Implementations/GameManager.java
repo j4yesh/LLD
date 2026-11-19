@@ -1,6 +1,5 @@
 package Implementations;
 
-import java.util.List;
 import Enums.CurrentMove;
 import Interface.IPlayerStrategy;
 
@@ -32,8 +31,11 @@ public class GameManager {
                     Display.printStr("Invalid Move");
                     target = playerA.playMove();
                 }
-                this.missileByA(target);
-                if (this.checkWin()) {
+
+                boolean hit = gameBoard.fireAt(CurrentMove.PLAYERA, target);
+                Display.printStr(hit ? "HIT!" : "MISS!");
+
+                if (gameBoard.hasPlayerLost(CurrentMove.PLAYERB)) {
                     System.out.println("PLAYER A is a winner");
                     break;
                 }
@@ -47,8 +49,11 @@ public class GameManager {
                     Display.printStr("Invalid Move");
                     target = playerB.playMove();
                 }
-                this.missileByB(target);
-                if (this.checkWin()) {
+
+                boolean hit = gameBoard.fireAt(CurrentMove.PLAYERB, target);
+                Display.printStr(hit ? "HIT!" : "MISS!");
+
+                if (gameBoard.hasPlayerLost(CurrentMove.PLAYERA)) {
                     System.out.println("PLAYER B is a winner");
                     break;
                 }
@@ -70,46 +75,5 @@ public class GameManager {
         gameBoard.assign(playerAChoice, playerBChoice);
 
         Display.printStr("Both the player has Arranged the ship");
-    }
-
-    private void missileByA(Cell target) {
-        char current = gameBoard.playerBBoard.get(target.row).get(target.col);
-        if (current == 's') {
-            gameBoard.playerBBoard.get(target.row).set(target.col, 'x');
-            Display.printStr("HIT!");
-        } else {
-            gameBoard.playerBBoard.get(target.row).set(target.col, 'o');
-            Display.printStr("MISS!");
-        }
-    }
-
-    private void missileByB(Cell target) {
-        char current = gameBoard.playerABoard.get(target.row).get(target.col);
-        if (current == 's') {
-            gameBoard.playerABoard.get(target.row).set(target.col, 'x');
-            Display.printStr("HIT!");
-        } else {
-            gameBoard.playerABoard.get(target.row).set(target.col, 'o');
-            Display.printStr("MISS!");
-        }
-    }
-
-    private boolean checkWin() {
-        if (currentMove == CurrentMove.PLAYERA) {
-            return allShipsSunk(gameBoard.playerBBoard);
-        } else {
-            return allShipsSunk(gameBoard.playerABoard);
-        }
-    }
-
-    private boolean allShipsSunk(List<List<Character>> board) {
-        for (List<Character> row : board) {
-            for (char c : row) {
-                if (c == 's') {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }

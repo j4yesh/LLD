@@ -1,6 +1,7 @@
 package Implementations;
 
 import java.util.List;
+import Enums.CurrentMove;
 import Statics.ShipArrangement;
 
 public class Display {
@@ -19,38 +20,27 @@ public class Display {
     }
 
     public static void showBoardForPlayerA(GameBoard gameBoard) {
-        System.out.println("     YOUR BOARD (A)                OPPONENT BOARD (B)");
-        System.out.println("   0  1  2  3  4              0  1  2  3  4");
-        List<List<Character>> own = gameBoard.playerABoard;
-        List<List<Character>> opponent = gameBoard.playerBBoard;
-        for (int r = 0; r < own.size(); r++) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(r).append("  ");
-            for (int c = 0; c < own.get(r).size(); c++) {
-                sb.append(formatOwnCell(own.get(r).get(c))).append("  ");
-            }
-            sb.append("         ").append(r).append("  ");
-            for (int c = 0; c < opponent.get(r).size(); c++) {
-                sb.append(formatOpponentCell(opponent.get(r).get(c))).append("  ");
-            }
-            System.out.println(sb.toString());
-        }
+        showBoard(gameBoard, CurrentMove.PLAYERA, CurrentMove.PLAYERB, "YOUR BOARD (A)", "OPPONENT BOARD (B)");
     }
 
     public static void showBoardForPlayerB(GameBoard gameBoard) {
-        System.out.println("     YOUR BOARD (B)                OPPONENT BOARD (A)");
+        showBoard(gameBoard, CurrentMove.PLAYERB, CurrentMove.PLAYERA, "YOUR BOARD (B)", "OPPONENT BOARD (A)");
+    }
+
+    private static void showBoard(GameBoard gameBoard, CurrentMove own, CurrentMove opp, String ownLabel, String oppLabel) {
+        System.out.println("     " + ownLabel + "                " + oppLabel);
         System.out.println("   0  1  2  3  4              0  1  2  3  4");
-        List<List<Character>> own = gameBoard.playerBBoard;
-        List<List<Character>> opponent = gameBoard.playerABoard;
-        for (int r = 0; r < own.size(); r++) {
+        int rows = gameBoard.getRows();
+        int cols = gameBoard.getCols();
+        for (int r = 0; r < rows; r++) {
             StringBuilder sb = new StringBuilder();
             sb.append(r).append("  ");
-            for (int c = 0; c < own.get(r).size(); c++) {
-                sb.append(formatOwnCell(own.get(r).get(c))).append("  ");
+            for (int c = 0; c < cols; c++) {
+                sb.append(formatOwnCell(gameBoard.getCell(own, r, c))).append("  ");
             }
             sb.append("         ").append(r).append("  ");
-            for (int c = 0; c < opponent.get(r).size(); c++) {
-                sb.append(formatOpponentCell(opponent.get(r).get(c))).append("  ");
+            for (int c = 0; c < cols; c++) {
+                sb.append(formatOpponentCell(gameBoard.getCell(opp, r, c))).append("  ");
             }
             System.out.println(sb.toString());
         }
